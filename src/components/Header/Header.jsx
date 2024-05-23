@@ -5,22 +5,10 @@ import logo from '../../assets/images/logo.png';
 import userImg from '../../assets/images/avatar-icon.png';
 
 const navLinks = [
-  {
-    path: '/home',
-    display: 'Home'
-  },
-  {
-    path: '/doctors',
-    display: 'Find a Doctor'
-  },
-  {
-    path: '/services',
-    display: 'Services'
-  },
-  {
-    path: '/contact',
-    display: 'Contact'
-  },
+  { path: '/home', display: 'Home' },
+  { path: '/doctors', display: 'Find a Doctor' },
+  { path: '/services', display: 'Services' },
+  { path: '/contact', display: 'Contact' },
 ];
 
 const Header = ({ isLoggedIn, username }) => {
@@ -54,11 +42,15 @@ const Header = ({ isLoggedIn, username }) => {
           </div>
 
           {/* menu */}
-          <div className="naviagtion" ref={menuRef} onClick={toggleMenu}>
+          <div className="navigation" ref={menuRef} onClick={toggleMenu}>
             <ul className='menu flex items-center gap-[2.7rem]'>
-              {navLinks.map((link, index) =>(
+              {navLinks.map((link, index) => (
                 <li key={index}>
-                  <NavLink to={link.path} activeclassname="text-primaryColor text-[16px] leading-7 font-[600]" className="text-textColor text-[-16px] leading-7 font-[500] hover:text-primaryColor">
+                  <NavLink
+                    to={link.path}
+                    activeClassName="text-primaryColor text-[16px] leading-7 font-[600]"
+                    className="text-textColor text-[16px] leading-7 font-[500] hover:text-primaryColor"
+                  >
                     {link.display}
                   </NavLink>
                 </li>
@@ -68,26 +60,40 @@ const Header = ({ isLoggedIn, username }) => {
 
           {/* nav right */}
           <div className='flex items-center gap-4'>
-            {isLoggedIn ? (
-              <div>
-                <span className="text-primaryColor font-medium">{username}</span>
-                <Link to="/">
-                  <figure className='w-[35px] h-[35px] rounded-full cursor-pointer'>
-                    <img src={userImg} className='w-full rounded-full' alt="" />
-                  </figure> 
-                </Link>
-              </div>
-            ) : (
-              <>
-                <Link to='/login'>
-                  <button className='bg-primaryColor py-2 px-6 text-white font-[600] h-[44px] flex items-center justify-center rounded-[50px]'>Login</button>
-                </Link>
-                <span className='md:hidden' onClick={toggleMenu}>
-                  <BiMenu className='w-6 h-6 cursor-pointer' />
-                </span>
-              </>
-            )}
-          </div>
+  {isLoggedIn ? (
+    <div>
+      <span className="text-primaryColor font-medium">{username}</span>
+      <Link to="/">
+        <figure className='w-[35px] h-[35px] rounded-full cursor-pointer'>
+          <img src={userImg} className='w-full rounded-full' alt="" />
+        </figure>
+      </Link>
+    </div>
+  ) : (
+    <>
+      {username ? (
+        <div>
+          <span onClick={() => { window.location.reload() }} className="text-primaryColor font-medium cursor-pointer">{username}</span>
+          <Link to="/">
+            <figure className='w-[35px] h-[35px] rounded-full cursor-pointer'>
+              <img src={userImg} className='w-full rounded-full' alt="" />
+            </figure>
+          </Link>
+        </div>
+      ) : (
+        <>
+          <Link to='/register'>
+            <button className='bg-primaryColor py-2 px-6 text-white font-[600] h-[44px] flex items-center justify-center rounded-[50px]'>Sign Up</button>
+          </Link>
+          <Link to='/login'>
+            <button className='bg-primaryColor py-2 px-6 text-white font-[600] h-[44px] flex items-center justify-center rounded-[50px]'>Login</button>
+          </Link>
+        </>
+      )}
+    </>
+  )}
+</div>
+
         </div>
       </div>
     </header>

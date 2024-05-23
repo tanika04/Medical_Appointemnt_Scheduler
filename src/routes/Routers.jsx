@@ -8,6 +8,7 @@ import Contact from '../pages/Contact';
 import Doctors from '../pages/Doctors/Doctors';
 import DoctorDetails from '../pages/Doctors/DoctorDetails';
 import Header from '../components/Header/Header';
+import Profile from '../components/Profile';
 
 const Routers = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false); // Example state for user login status
@@ -22,7 +23,8 @@ const Routers = () => {
                 <Route path="/doctors" element={<Doctors />} />
                 <Route path="/doctors/:id" element={<DoctorDetails />} />
                 <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} setUsername={setUsername} />} /> {/* Pass setIsLoggedIn and setUsername props to Login component */}
-                <Route path="/register" element={<Signup setUsername={setUsername} />} /> {/* Pass setUsername prop to Signup component */}
+                <Route path="/register" element={<Signup setIsSignedUp={ setIsLoggedIn} setUsername={setUsername} />} /> {/* Pass setUsername prop to Signup component */}
+                <Route path='/profile' element={<Profile/>}/>
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/services" element={<Services />} />
                 <Route path="*" element={<Navigate to="/" />} /> {/* Fallback route */}
